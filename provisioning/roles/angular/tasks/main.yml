@@ -1,0 +1,7 @@
+---
+- name: get angular seed project
+  git: repo=https://github.com/angular/angular-seed.git dest=~/angular-seed
+- name: install dependencies with nodejs
+ # sudo: yes
+#  sudo_user: vagrant
+  command: cd ~/angular-seed &&  npm install
