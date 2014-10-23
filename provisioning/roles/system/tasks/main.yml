@@ -1,0 +1,11 @@
+---
+- name: update and upgrading packages
+  sudo: yes
+  apt: update_cache=yes upgrade=safe
+- name: install nodejs and npm
+  sudo: yes
+  apt: pkg=nodejs state=latest
+  apt: pkg=npm state=latest
+- name: install git
+  sudo: yes
+  apt: pkg=git state=latest
