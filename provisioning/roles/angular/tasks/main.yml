@@ -1,7 +1,10 @@
 ---
 - name: get angular seed project
   git: repo=https://github.com/angular/angular-seed.git dest=~/angular-seed
+- name: create alias for nodejs to node
+  sudo: yes
+  shell: ln -sf /usr/bin/nodejs /usr/bin/node
 - name: install dependencies with nodejs
  # sudo: yes
 #  sudo_user: vagrant
-  command: cd ~/angular-seed &&  npm install
+  shell: cd ~/angular-seed &&  npm install
