@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  #config.vm.network "forwarded_port", guest: 8000, host: 8000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -46,10 +46,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
+    #   # Don't boot with headless mode
+    #   vb.gui = true
   #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
+    #   # Use VBoxManage to customize the VM. For example to change memory:
     #   vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.memory = 512
   end
@@ -65,12 +65,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   cf.am_policy_hub = true
   #   # cf.run_file = "motd.cf"
   # end
-  #
+#
   # You can also configure and bootstrap a client to an existing
   # policy server:
   #
   # config.vm.provision "cfengine" do |cf|
-  #   cf.policy_server_address = "10.0.2.15"
+  #   cdf.policy_server_address = "10.0.2.15"
   # end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
@@ -87,58 +87,58 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
-  # config.vm.provision "chef_solo" do |chef|
-  #   chef.cookbooks_path = "../my-recipes/cookbooks"
-  #   chef.roles_path = "../my-recipes/roles"
-  #   chef.data_bags_path = "../my-recipes/data_bags"
-  #   chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { mysql_password: "foo" }
-  # end
+# config.vm.provision "chef_solo" do |chef|
+#   chef.cookbooks_path = "../my-recipes/cookbooks"
+#   chef.roles_path = "../my-recipes/roles"
+#   chef.data_bags_path = "../my-recipes/data_bags"
+#   chef.add_recipe "mysql"
+#   chef.add_role "web"
+#
+#   # You may also specify custom JSON attributes:
+#   chef.json = { mysql_password: "foo" }
+# end
 
-  # Enable provisioning with chef server, specifying the chef server URL,
-  # and the path to the validation key (relative to this Vagrantfile).
-  #
-  # The Opscode Platform uses HTTPS. Substitute your organization for
-  # ORGNAME in the URL and validation key.
-  #
-  # If you have your own Chef Server, use the appropriate URL, which may be
-  # HTTP instead of HTTPS depending on your configuration. Also change the
-  # validation key to validation.pem.
-  #
-  # config.vm.provision "chef_client" do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
-  #   chef.validation_key_path = "ORGNAME-validator.pem"
-  # end
-  #
-  # If you're using the Opscode platform, your validator client is
-  # ORGNAME-validator, replacing ORGNAME with your organization name.
-  #
-  # If you have your own Chef Server, the default validation client name is
-  # chef-validator, unless you changed the configuration.
-  #
-  #   chef.validation_client_name = "ORGNAME-validator"
-  # Workaraound copying SSH key for vagrant provision
-  # You MUST have a ~/.ssh/github_rsa (GitHub specific) SSH key to copy to VM
- # if File.exists?(File.join(Dir.home, ".ssh", "github_rsa"))
-    # Read local machine's GitHub SSH Key (~/.ssh/github_rsa)
-  #  github_ssh_key = File.read(File.join(Dir.home, ".ssh", "github_rsa"))
-    # Copy it to VM as the /root/.ssh/id_rsa key
-   # config.vm.provision :shell, :inline => "echo 'Provision-specific: Copying local GitHub SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{github_ssh_key}' > /home/vagrant/.ssh/id_rsa && chmod 600 /home/vagrant/.ssh/id_rsa"
-  #else
-    # Else, throw a Vagrant Error. Cannot successfully startup on Windows without a GitHub SSH Key!
-   # raise Vagrant::Errors::VagrantError, "\n\nERROR: GitHub SSH Key not found at ~/.ssh/github_rsa (required for provision).\nYou can generate this key manually\n\n"
-  #end
+# Enable provisioning with chef server, specifying the chef server URL,
+# and the path to the validation key (relative to this Vagrantfile).
+#
+# The Opscode Platform uses HTTPS. Substitute your organization for
+# ORGNAME in the URL and validation key.
+#
+# If you have your own Chef Server, use the appropriate URL, which may be
+# HTTP instead of HTTPS depending on your configuration. Also change the
+# validation key to validation.pem.
+#
+# config.vm.provision "chef_client" do |chef|
+#   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
+#   chef.validation_key_path = "ORGNAME-validator.pem"
+# end
+#
+# If you're using the Opscode platform, your validator client is
+# ORGNAME-validator, replacing ORGNAME with your organization name.
+#
+# If you have your own Chef Server, the default validation client name is
+# chef-validator, unless you changed the configuration.
+#
+#   chef.validation_client_name = "ORGNAME-validator"
+# Workaraound copying SSH key for vagrant provision
+# You MUST have a ~/.ssh/github_rsa (GitHub specific) SSH key to copy to VM
+# if File.exists?(File.join(Dir.home, ".ssh", "github_rsa"))
+# Read local machine's GitHub SSH Key (~/.ssh/github_rsa)
+#  github_ssh_key = File.read(File.join(Dir.home, ".ssh", "github_rsa"))
+# Copy it to VM as the /root/.ssh/id_rsa key
+# config.vm.provision :shell, :inline => "echo 'Provision-specific: Copying local GitHub SSH Key to VM for provisioning...' && mkdir -p /home/vagrant/.ssh && echo '#{github_ssh_key}' > /home/vagrant/.ssh/id_rsa && chmod 600 /home/vagrant/.ssh/id_rsa"
+#else
+# Else, throw a Vagrant Error. Cannot successfully startup on Windows without a GitHub SSH Key!
+# raise Vagrant::Errors::VagrantError, "\n\nERROR: GitHub SSH Key not found at ~/.ssh/github_rsa (required for provision).\nYou can generate this key manually\n\n"
+#end
 
 
-  config.ssh.forward_agent = true
-  config.vm.provision "ansible" do |ansible|
-   # config.ssh.forward_agent = true
-    ansible.verbose = "vvv"
-    ansible.extra_vars = { ansible_ssh_user: 'vagrant', remote_user: 'vagrant'}
-     ansible.raw_ssh_args = ["-o UserKnownHostsFile=/dev/null"]
-    ansible.playbook = "provisioning/playbook.yml"
-  end
+config.ssh.forward_agent = true
+config.vm.provision "ansible" do |ansible|
+  # config.ssh.forward_agent = true
+  ansible.verbose = "vvv"
+  ansible.extra_vars = { ansible_ssh_user: 'vagrant', remote_user: 'vagrant'}
+  ansible.raw_ssh_args = ["-o UserKnownHostsFile=/dev/null"]
+  ansible.playbook = "provisioning/playbook.yml"
+end
 end

@@ -4,6 +4,10 @@
 - name: create alias for nodejs to node
   sudo: yes
   shell: ln -sf /usr/bin/nodejs /usr/bin/node
+- name: install grunt & bower
+  sudo: yes
+  shell: npm install -g grunt
+  shell: npm install -g bower
 - name: install dependencies with nodejs
  # sudo: yes
 #  sudo_user: vagrant

@@ -9,3 +9,9 @@
 - name: install git
   sudo: yes
   apt: pkg=git state=latest
+- name: install ufw
+  apt: pkg=ufw state=latest
+- name: open 8000 port
+  sudo: yes
+  shell: ufw enable
+  shell: ufw allow 8000/tcp
