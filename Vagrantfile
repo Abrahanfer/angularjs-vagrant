@@ -33,7 +33,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
-  config.ssh.forward_agent = true
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -120,8 +119,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
+  #config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
+  config.ssh.forward_agent = true
+
+  config.vm.provision 'shell',
+#  privileged: true,
+  run: 'once',
+  path: "provisioning/git-clone.sh"
+
   config.vm.provision "ansible" do |ansible|
-    #ansible.verbose = "vvv"
+    ansible.verbose = "vvvv"
+    #ansible.extra_vars = { ansible_ssh_user: 'vagrant'}
+    #    ansible.sudo =true
+#    ansible.host_key_checking = false
     ansible.playbook = "provisioning/playbook.yml"
+ #   ansible.extra_vars = { ansible_ssh_user: 'vagrant',
+  #    ansible_connection: 'ssh',
+   #   ansible_ssh_args: '-o ForwardAgent=yes'}
   end
 end
