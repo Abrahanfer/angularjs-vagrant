@@ -1,13 +1,8 @@
 ---
 - name: get angular seed project
-#  sudo: no
-  #sudo_user: vagrant
-  git: accept_hostkey=yes repo=git@github.com:Abrahanfer/angular-hackernews.git dest=~/angular-hackernews
-  #shell: git clone git@github.com:Abrahanfer/angular-hackernews.git ~/angular-hackernews
+  git: accept_hostkey=true repo=git@github.com:Abrahanfer/angular-hackernews.git dest=~/angular-hackernews
 - name: create alias for nodejs to node
   sudo: yes
   shell: ln -sf /usr/bin/nodejs /usr/bin/node
 - name: install dependencies with nodejs
- # sudo: yes
-#  sudo_user: vagrant
   shell: cd ~/angular-hackernews &&  npm install
