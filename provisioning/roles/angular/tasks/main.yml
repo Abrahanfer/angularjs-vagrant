@@ -9,6 +9,4 @@
   shell: npm install -g grunt
   shell: npm install -g bower
 - name: install dependencies with nodejs
- # sudo: yes
-#  sudo_user: vagrant
   shell: cd ~/angular-hackernews &&  npm install
